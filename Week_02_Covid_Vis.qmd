@@ -1,7 +1,7 @@
 ---
 title: "Week 02: COVID Visualization Activity"
 date: "September, 11 2023"
-author: "**`[[`**Your Name**`]]`**"
+author: "Renata Serio"
 ---
 
 Today, we'll be working with a data set related to COVID.
@@ -21,7 +21,10 @@ Try using the different data sets and see which ones are good for making which p
 
 
 ```{r first_plot}
-ggplot(covid_data_count, aes(x = date, y = Cases)) + geom_point()
+
+ggplot(covid_data_count, aes(x = date, y = Cases/population)) + geom_point()
+ggplot(covid_data_orig, aes(x = State, y = Cases_Total)) + geom_boxplot() + theme(axis.text.x=element_text(angle = 45))
+ggplot(covid_data_long, aes(y = count, x = race, fill = count_type)) + geom_boxplot()
 ```
 
 
@@ -31,11 +34,27 @@ For now, see what you can do just using `ggplot`.
 
 ```{r}
 covid_data_count |> 
-  filter(state == "MA") |> 
+  filter(state == "ME") |> 
   ggplot(aes(x = date, y = Cases, color = race)) + geom_line()
 ```
 
 1. Write code for a plot and describe what you observe?
+```{r}
+x <- subset(covid_data_long, race != "Total")
+ggplot(x, aes(x = race, fill = count_type)) + geom_bar(position = "dodge")
+ggplot(x, aes(x = count_type, fill = race)) + geom_bar(position = "dodge")
+y <- subset(x, count_type == "Tests")
+ggplot(y, aes(x = race, fill = count_type)) + geom_bar(position = "dodge")
+```
+As I was interested in the relationship between race, and covid related deaths, cases, tests and hospitalizations, I wanted to create a plot that could encompass all five of these factors. I created two bar plots, one looking at race on the x axis with a fill of "count_type" and the other is reversed. It appears from these two graphs that the majority of the cases, deaths and hospitalizations occur in white and black populations. And I did not feel like I had enough resolution to evalute the tests metric so I isolated this metric and plotted it alone. 
+
 2. Are there any conclusions you can draw?
+
+It appears that like I observed above the majority of the cases/hospitalizations/deaths from covid occurred in white and black populations. It also appears that there are slightly more cases than deaths in each of the populations aside from the "Latinx" population in which deaths outweigh total cases. The Latinx population also appears to have less access to testing compared with white, black, and asian populations. More investigation would be required to claim this is connected to the higher death rate. 
+
 3. What were you not able to do due to not having the R knowledge?
+As you can see in my code above, I was unable to master filtering data before plotting in ggplot2, therefore I manually created "subsets" named x and y to do this filtering process for me. I would like to get better a data wrangling within the context of ggplot itself ot make this process more streamlined. Additionally, I would like to incldue some evaluation of statistical significance here, but do not yet know how to include error bars or conduct a ANOVA/t-test in R. 
+
 4. What other data would be useful to better understand this data?
+
+It was not clear how this data was collected and if due to the method of collection there was a bias for certain ethnicity groups or recovery groups. For instance, it seems like the death and case rates are fairly equal in count here, this is not representative of the reality of the virus, as the virus is likely to only kill about <5% of individuals infected. This was not the case with this graph which is a king of "flag" that perhaps my method of displaying the data here was not adequate to properly represent the data as a whole. 
