@@ -21,7 +21,6 @@ Try using the different data sets and see which ones are good for making which p
 
 
 ```{r first_plot}
-
 ggplot(covid_data_count, aes(x = date, y = Cases/population)) + geom_point()
 ggplot(covid_data_orig, aes(x = State, y = Cases_Total)) + geom_boxplot() + theme(axis.text.x=element_text(angle = 45))
 ggplot(covid_data_long, aes(y = count, x = race, fill = count_type)) + geom_boxplot()
@@ -41,12 +40,12 @@ covid_data_count |>
 1. Write code for a plot and describe what you observe?
 ```{r}
 x <- subset(covid_data_long, race != "Total")
-ggplot(x, aes(x = race, fill = count_type)) + geom_bar(position = "dodge")
+ggplot(x, aes(x = race, fill = count_type)) + geom_bar(position = "fill")
 ggplot(x, aes(x = count_type, fill = race)) + geom_bar(position = "dodge")
 y <- subset(x, count_type == "Tests")
 ggplot(y, aes(x = race, fill = count_type)) + geom_bar(position = "dodge")
 ```
-As I was interested in the relationship between race, and covid related deaths, cases, tests and hospitalizations, I wanted to create a plot that could encompass all five of these factors. I created two bar plots, one looking at race on the x axis with a fill of "count_type" and the other is reversed. It appears from these two graphs that the majority of the cases, deaths and hospitalizations occur in white and black populations. And I did not feel like I had enough resolution to evalute the tests metric so I isolated this metric and plotted it alone. 
+As I was interested in the relationship between race, and covid related deaths, cases, tests and hospitalizations, I wanted to create a plot that could encompass all five of these factors. I created two bar plots, one looking at race on the x axis with a fill of "count_type" and the other is reversed. It appears from these two graphs that the majority of the cases, deaths and hospitalizations occur in white and black populations. And I did not feel like I had enough resolution to evaluate the tests metric so I isolated this metric and plotted it alone. In one graph I used position = fill to compare the metrics across bars, and in the other I used "dodge" as there were too many factors to yield a visually appeaing graph using the fill parameter. 
 
 2. Are there any conclusions you can draw?
 

@@ -165,7 +165,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">subset</span>(covid_data_long, race <span class="sc">!=</span> <span class="st">"Total"</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(x, <span class="fu">aes</span>(<span class="at">x =</span> race, <span class="at">fill =</span> count_type)) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(x, <span class="fu">aes</span>(<span class="at">x =</span> race, <span class="at">fill =</span> count_type)) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Week_02_Covid_Vis_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -179,7 +179,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="Week_02_Covid_Vis_files/figure-html/unnamed-chunk-2-3.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>As I was interested in the relationship between race, and covid related deaths, cases, tests and hospitalizations, I wanted to create a plot that could encompass all five of these factors. I created two bar plots, one looking at race on the x axis with a fill of “count_type” and the other is reversed. It appears from these two graphs that the majority of the cases, deaths and hospitalizations occur in white and black populations. And I did not feel like I had enough resolution to evalute the tests metric so I isolated this metric and plotted it alone.</p>
+<p>As I was interested in the relationship between race, and covid related deaths, cases, tests and hospitalizations, I wanted to create a plot that could encompass all five of these factors. I created two bar plots, one looking at race on the x axis with a fill of “count_type” and the other is reversed. It appears from these two graphs that the majority of the cases, deaths and hospitalizations occur in white and black populations. And I did not feel like I had enough resolution to evaluate the tests metric so I isolated this metric and plotted it alone. In one graph I used position = fill to compare the metrics across bars, and in the other I used “dodge” as there were too many factors to yield a visually appeaing graph using the fill parameter.</p>
 <ol start="2" type="1">
 <li>Are there any conclusions you can draw?</li>
 </ol>
